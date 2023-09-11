@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  db:
+    image: mysql
+    platform: linux/x86_64
+    restart: always
+    container_name: 'NoirDatabaseContainer'
+    environment:
+      MYSQL_DATABASE: 'noir-db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '5360:3306'
+    expose:
+      - '5360'

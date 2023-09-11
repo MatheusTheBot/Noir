@@ -1,0 +1,14 @@
+package Enums;
+
+public enum EParcelTypes {
+    SMALL_ENVELOPE,
+    LARGE_ENVELOPE,
+    SMALL_PACKAGE,
+    MEDIUM_PACKAGE,
+    LARGE_PACKAGE,
+    FRAGILE_ITEM,
+    PERISHABLE_ITEM,
+    DOCUMENTS,
+    CONFIDENTIAL,
+    UNKNOWN_TYPE
+}
