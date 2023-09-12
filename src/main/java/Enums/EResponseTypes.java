@@ -3,5 +3,6 @@ package Enums;
 public enum EResponseTypes {
     InvalidData,
     NullData,
-    NullQuery
+    NullQuery,
+    ValidQuery
 }
