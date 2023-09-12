@@ -1,7 +1,5 @@
 package Models;
 
-import Models.Contracts.ModelContract;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
