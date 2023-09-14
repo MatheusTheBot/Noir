@@ -9,21 +9,30 @@ import Models.ResponseModel;
 import Repository.AdminRepo;
 import Repository.ResidentRepo;
 
-public class LoginHandler implements HandlerContract<ResponseModel<Boolean>, LoginCommand> {
+public class LoginHandler implements HandlerContract<ResponseModel<String>, LoginCommand> {
 
     @Override
-    public ResponseModel<Boolean> handle(LoginCommand input) {
+    public ResponseModel<String> handle(LoginCommand input) {
         //FIXME: probably i should inject the repo instead of instantiate it
+
+        String response = "";
 
         Admin response1 = new AdminRepo().loginQuery(input.getUsername(), input.getPassword());
         Resident response2 = new ResidentRepo().loginQuery(input.getUsername(), input.getPassword());
 
         if(response1 == null && response2 == null){
             return new ResponseModel<>(input.toString(),
-                    false, new String[] {EResponseTypes.NullQuery.name()}, false);
+                    false, new String[] {EResponseTypes.NullQuery.name()}, "");
+        }
+
+        if(response1 != null){
+            response = "Admin";
+        }
+        else {
+            response = "User";
         }
 
         return new ResponseModel<>(input.toString(),
-                true, new String[] {EResponseTypes.ValidQuery.name()}, true);
+                true, new String[] {EResponseTypes.ValidQuery.name()}, response);
     }
 }

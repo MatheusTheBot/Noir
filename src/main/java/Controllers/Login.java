@@ -16,10 +16,10 @@ public class Login  {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ResponseModel<Boolean> login(LoginCommand command) {
+    public ResponseModel<String> login(LoginCommand command) {
         command.validate();
         if(command.isInvalid()){
-            return new ResponseModel<>(EResponseTypes.InvalidData.toString(), false, null, false);
+            return new ResponseModel<>(EResponseTypes.InvalidData.toString(), false, null, "");
         }
 
         LoginHandler handler = new LoginHandler();
