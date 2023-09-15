@@ -7,6 +7,7 @@ import Handlers.LoginHandler;
 import Models.ResponseModel;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
@@ -19,7 +20,7 @@ public class Login  {
     public ResponseModel<String> login(LoginCommand command) {
         command.validate();
         if(command.isInvalid()){
-            return new ResponseModel<>(EResponseTypes.InvalidData.toString(), false, null, "");
+            return new ResponseModel<>(command.toString(), false, command.getNotifications().toArray(), EResponseTypes.InvalidData.toString());
         }
 
         LoginHandler handler = new LoginHandler();

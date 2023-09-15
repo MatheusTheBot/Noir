@@ -4,10 +4,7 @@ package Commands;
 import Commands.Contract.ICommandContract;
 import jflunt.notifications.Notifiable;
 import jflunt.validations.Contract;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -28,8 +25,7 @@ public class LoginCommand extends Notifiable implements ICommandContract  {
 
         contract
                 .requires()
-                .isNotNullOrEmpty(password, "password", "Password is required")
-                .hasMinLen(password, 8, "password", "Password must have at least 8 characters");
+                .isNotNullOrEmpty(password, "password", "Password is required");
 
         addNotifications(contract);
     }
