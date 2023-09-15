@@ -32,7 +32,6 @@ public class LoginHandler implements HandlerContract<ResponseModel<String>, Logi
             response = "User";
         }
 
-        return new ResponseModel<>(input.toString(),
-                true, new String[] {EResponseTypes.ValidQuery.name()}, response);
+        return new ResponseModel<>(input.toString(),true, EResponseTypes.ValidQuery.name().split(","), response);
     }
 }
