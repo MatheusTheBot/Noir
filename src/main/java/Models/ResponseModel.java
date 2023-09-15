@@ -13,6 +13,6 @@ import lombok.Setter;
 public class ResponseModel<T> {
     String commandTitle;
     boolean isSuccess;
-    String[] observations;
+    Object[] observations;
     T response;
 }
