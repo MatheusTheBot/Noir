@@ -1,21 +1,21 @@
 package Controllers;
 
-import Commands.CreateOrModifyResidentCommand;
+import Commands.CreateOrModifyVisitorCommand;
 import Commands.DeleteCommand;
 import Enums.EResponseTypes;
-import Handlers.Resident.CreateResidentHandler;
-import Handlers.Resident.DeleteResidentHandler;
-import Handlers.Resident.ModifyResidentHandler;
+import Handlers.Visitor.CreateVisitorHandler;
+import Handlers.Visitor.DeleteVisitorHandler;
+import Handlers.Visitor.ModifyVisitorHandler;
 import Models.ResponseModel;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/resident")
+@Path("/visitors")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class Resident {
+public class Visitor {
     @POST
-    public ResponseModel<Boolean> CreateResident(CreateOrModifyResidentCommand command) {
+    public ResponseModel<Boolean> CreateVisitor(CreateOrModifyVisitorCommand command) {
         command.validate();
         if (command.isInvalid()) {
             return new ResponseModel<>(
@@ -26,12 +26,12 @@ public class Resident {
             );
         }
 
-        CreateResidentHandler handler = new CreateResidentHandler();
+        CreateVisitorHandler handler = new CreateVisitorHandler();
         return handler.handle(command);
     }
 
     @PUT
-    public ResponseModel<Boolean> ModifyResident(CreateOrModifyResidentCommand command) {
+    public ResponseModel<Boolean> ModifyVisitor(CreateOrModifyVisitorCommand command) {
         command.validate();
         if (command.isInvalid()) {
             return new ResponseModel<>(
@@ -42,12 +42,12 @@ public class Resident {
             );
         }
 
-        ModifyResidentHandler handler = new ModifyResidentHandler();
+        ModifyVisitorHandler handler = new ModifyVisitorHandler();
         return handler.handle(command);
     }
 
     @DELETE
-    public ResponseModel<String> DeleteResident(DeleteCommand command) {
+    public ResponseModel<String> DeleteVisitor(DeleteCommand command) {
         command.validate();
         if (command.isInvalid()) {
             return new ResponseModel<>(
@@ -58,7 +58,7 @@ public class Resident {
             );
         }
 
-        DeleteResidentHandler handler = new DeleteResidentHandler();
+        DeleteVisitorHandler handler = new DeleteVisitorHandler();
         return handler.handle(command);
     }
 }

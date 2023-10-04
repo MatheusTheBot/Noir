@@ -1,10 +1,10 @@
 package Controllers;
 
 import Commands.CreateOrModifyApartCommand;
-import Commands.DeleteApartCommand;
+import Commands.DeleteCommand;
 import Enums.EResponseTypes;
-import Handlers.CreateApartHandler;
-import Handlers.DeleteApartHandler;
+import Handlers.Apart.CreateApartHandler;
+import Handlers.Apart.DeleteApartHandler;
 import Models.ResponseModel;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -12,12 +12,12 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/apart")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class Apart{
+public class Apart {
 
     @POST
-    public ResponseModel<String> CreateApart(CreateOrModifyApartCommand command){
+    public ResponseModel<String> CreateApart(CreateOrModifyApartCommand command) {
         command.validate();
-        if(command.isInvalid()){
+        if (command.isInvalid()) {
             return new ResponseModel<>(
                     command.toString(),
                     false,
@@ -28,10 +28,11 @@ public class Apart{
         CreateApartHandler handler = new CreateApartHandler();
         return handler.handle(command);
     }
+
     @PUT
-    public ResponseModel<String> ModifyApart(CreateOrModifyApartCommand command){
+    public ResponseModel<String> ModifyApart(CreateOrModifyApartCommand command) {
         command.validate();
-        if(command.isInvalid()){
+        if (command.isInvalid()) {
             return new ResponseModel<>(
                     command.toString(),
                     false,
@@ -44,9 +45,9 @@ public class Apart{
     }
 
     @DELETE
-    public ResponseModel<String> DeleteApart(DeleteApartCommand command){
+    public ResponseModel<String> DeleteApart(DeleteCommand command) {
         command.validate();
-        if(command.isInvalid()){
+        if (command.isInvalid()) {
             return new ResponseModel<>(
                     command.toString(),
                     false,

@@ -1,21 +1,22 @@
 package Controllers;
 
-import Commands.CreateOrModifyResidentCommand;
+import Commands.CreateOrModifyStaffCommand;
 import Commands.DeleteCommand;
 import Enums.EResponseTypes;
-import Handlers.Resident.CreateResidentHandler;
-import Handlers.Resident.DeleteResidentHandler;
-import Handlers.Resident.ModifyResidentHandler;
+import Handlers.Staff.CreateStaffHandler;
+import Handlers.Staff.DeleteStaffHandler;
+import Handlers.Staff.ModifyStaffHandler;
 import Models.ResponseModel;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/resident")
+@Path("/staff")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class Resident {
+public class Staff {
+
     @POST
-    public ResponseModel<Boolean> CreateResident(CreateOrModifyResidentCommand command) {
+    public ResponseModel<Boolean> CreateResident(CreateOrModifyStaffCommand command) {
         command.validate();
         if (command.isInvalid()) {
             return new ResponseModel<>(
@@ -26,12 +27,12 @@ public class Resident {
             );
         }
 
-        CreateResidentHandler handler = new CreateResidentHandler();
+        CreateStaffHandler handler = new CreateStaffHandler();
         return handler.handle(command);
     }
 
     @PUT
-    public ResponseModel<Boolean> ModifyResident(CreateOrModifyResidentCommand command) {
+    public ResponseModel<Boolean> ModifyResident(CreateOrModifyStaffCommand command) {
         command.validate();
         if (command.isInvalid()) {
             return new ResponseModel<>(
@@ -42,7 +43,7 @@ public class Resident {
             );
         }
 
-        ModifyResidentHandler handler = new ModifyResidentHandler();
+        ModifyStaffHandler handler = new ModifyStaffHandler();
         return handler.handle(command);
     }
 
@@ -58,7 +59,7 @@ public class Resident {
             );
         }
 
-        DeleteResidentHandler handler = new DeleteResidentHandler();
+        DeleteStaffHandler handler = new DeleteStaffHandler();
         return handler.handle(command);
     }
 }
