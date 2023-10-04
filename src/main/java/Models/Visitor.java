@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -13,15 +15,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "visitors")
 public class Visitor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
     String name;
     String document;
-    int age;
+    Date birthDate;
     boolean isAllowed;
-
     @ManyToOne
     Apart apart;
+
+    public Visitor(int id, String name, String document, Date birthDate, Boolean isAllowed) {
+        this.id = id;
+        this.name = name;
+        this.document = document;
+        this.birthDate = birthDate;
+        this.isAllowed = isAllowed;
+
+    }
 }

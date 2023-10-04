@@ -1,14 +1,13 @@
 package Models;
 
 import Enums.EParcelTypes;
-
-import java.util.Date;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -22,7 +21,8 @@ public class Parcel {
     int id;
 
     EParcelTypes type;
-    String parcelDescription;
+    String description;
     Date arrivedDate;
     String forWho;
+    Date pickedDate;
 }
