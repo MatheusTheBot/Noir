@@ -11,14 +11,15 @@ public class ApartQuery {
     @Inject
     ApartRepo repo;
 
-    public List<Apart> getAll(){
+    public List<Apart> getAll() {
         return this.repo.listAll();
     }
-    public Apart getById(int id){
+
+    public Apart getById(int id) {
         return this.repo.findById(id);
     }
 
-    public Apart getByApartNumbers(int apart, int block){
+    public Apart getByApartNumbers(int apart, int block) {
         return this.repo.findByApartAndBlock(apart, block);
     }
 }

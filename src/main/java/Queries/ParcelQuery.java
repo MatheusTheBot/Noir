@@ -1,19 +1,20 @@
 package Queries;
 
 import Models.Parcel;
-import Repository.ParcelsRepo;
+import Repository.ParcelRepo;
 import jakarta.inject.Inject;
 
 import java.util.List;
 
-public class ParcelsQuery {
+public class ParcelQuery {
     @Inject
-    ParcelsRepo repo;
+    ParcelRepo repo;
 
-    public List<Parcel> getAll(){
+    public List<Parcel> getAll() {
         return this.repo.listAll();
     }
-    public Parcel getById(int id){
+
+    public Parcel getById(int id) {
         return this.repo.findById(id);
     }
 }
