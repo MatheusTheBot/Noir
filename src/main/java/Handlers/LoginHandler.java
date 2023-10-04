@@ -8,30 +8,34 @@ import Models.Resident;
 import Models.ResponseModel;
 import Repository.AdminRepo;
 import Repository.ResidentRepo;
+import jakarta.inject.Inject;
 
 public class LoginHandler implements HandlerContract<ResponseModel<String>, LoginCommand> {
 
+    @Inject
+    AdminRepo admin;
+
+    @Inject
+    ResidentRepo resident;
+
     @Override
     public ResponseModel<String> handle(LoginCommand input) {
-        //FIXME: probably i should inject the repo instead of instantiate it
-
         String response = "";
 
-        Admin response1 = new AdminRepo().loginQuery(input.getUsername(), input.getPassword());
-        Resident response2 = new ResidentRepo().loginQuery(input.getUsername(), input.getPassword());
+        Admin response1 = admin.loginQuery(input.getUsername(), input.getPassword());
+        Resident response2 = resident.loginQuery(input.getUsername(), input.getPassword());
 
-        if(response1 == null && response2 == null){
+        if (response1 == null && response2 == null) {
             return new ResponseModel<>(input.toString(),
-                    false, new String[] {EResponseTypes.NullQuery.name()}, "");
+                    false, new String[]{EResponseTypes.NullQuery.name()}, "");
         }
 
-        if(response1 != null){
+        if (response1 != null) {
             response = "Admin";
-        }
-        else {
+        } else {
             response = "User";
         }
 
-        return new ResponseModel<>(input.toString(),true, EResponseTypes.ValidQuery.name().split(","), response);
+        return new ResponseModel<>(input.toString(), true, EResponseTypes.ValidQuery.name().split(","), response);
     }
 }

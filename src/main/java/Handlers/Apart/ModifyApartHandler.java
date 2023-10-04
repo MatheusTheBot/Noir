@@ -1,4 +1,4 @@
-package Handlers;
+package Handlers.Apart;
 
 import Commands.CreateOrModifyApartCommand;
 import Enums.EResponseTypes;
@@ -8,37 +8,34 @@ import Models.ResponseModel;
 import Repository.ApartRepo;
 import jakarta.inject.Inject;
 
-import java.util.Optional;
-
-public class ModifyApartHandler  implements HandlerContract<ResponseModel<Apart>, CreateOrModifyApartCommand> {
+public class ModifyApartHandler implements HandlerContract<ResponseModel<Boolean>, CreateOrModifyApartCommand> {
     @Inject
     ApartRepo repo;
 
     @Override
-    public ResponseModel<Apart> handle(CreateOrModifyApartCommand input){
+    public ResponseModel<Boolean> handle(CreateOrModifyApartCommand input) {
         Apart apart = new Apart(input.getId(), input.getApart(), input.getBuilding());
 
-        Optional<Apart> response;
+        boolean response;
 
-        try {
-            response = repo.update(apart);
-        }
-        catch (Exception e){
+        response = repo.update(apart);
+
+        if (!response) {
             return new ResponseModel<>(
                     input.toString(),
                     false,
-                    new String[] {EResponseTypes.PersistanceError.name()},
+                    new String[]{EResponseTypes.PersistanceError.name()},
                     null
             );
         }
-        finally {
-            repo.flush();
-        }
+
+        repo.flush();
+
         return new ResponseModel<>(
                 input.toString(),
                 true,
-                new String[] {EResponseTypes.ValidQuery.name()},
-                response.orElse(null)
+                new String[]{EResponseTypes.ValidQuery.name()},
+                null
         );
     }
 }
