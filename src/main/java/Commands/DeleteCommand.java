@@ -2,6 +2,7 @@ package Commands;
 
 import Commands.Contract.ICommandContract;
 import jflunt.notifications.Notifiable;
+import jflunt.validations.Contract;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +12,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteApartCommand extends Notifiable implements ICommandContract {
+public class DeleteCommand extends Notifiable implements ICommandContract {
 
-    int id;
+    private int id;
 
     @Override
     public void validate() {
-        //TODO: implement
+        Contract contract = new Contract();
+
+        contract
+                .requires()
+                .isNotNull(id, "id", "Id is required");
+
+        addNotifications(contract);
     }
 }

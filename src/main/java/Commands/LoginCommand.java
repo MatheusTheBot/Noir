@@ -4,13 +4,16 @@ package Commands;
 import Commands.Contract.ICommandContract;
 import jflunt.notifications.Notifiable;
 import jflunt.validations.Contract;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginCommand extends Notifiable implements ICommandContract  {
+public class LoginCommand extends Notifiable implements ICommandContract {
     String username;
     String password;
 
