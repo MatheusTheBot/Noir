@@ -2,7 +2,7 @@ package Enums;
 
 public enum EResponseTypes {
     InvalidData,
-    NullData,
     NullQuery,
-    ValidQuery
+    ValidQuery,
+    PersistanceError,
 }
