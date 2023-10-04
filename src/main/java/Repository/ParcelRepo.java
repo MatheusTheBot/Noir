@@ -1,27 +1,24 @@
 package Repository;
 
-import Models.Apart;
+import Models.Parcel;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class ApartRepo implements PanacheRepositoryBase<Apart, Integer> {
+public class ParcelRepo implements PanacheRepositoryBase<Parcel, Integer> {
 
-    public Apart findByApartAndBlock(int apart, int block) {
-        return find("Apart=?1 and Block=?2",
-                apart, block)
-                .firstResult();
-    }
-
-    public boolean update(Apart item) {
+    public boolean update(Parcel item) {
         final var id = item.getId();
         var toUpdate = this.findById(id);
         if (toUpdate == null) {
             return false;
         }
 
-        toUpdate.setApart(item.getApart());
-        toUpdate.setBuilding(item.getBuilding());
+        toUpdate.setType(item.getType());
+        toUpdate.setDescription(item.getDescription());
+        toUpdate.setArrivedDate(item.getArrivedDate());
+        toUpdate.setPickedDate(item.getPickedDate());
+        toUpdate.setForWho(item.getForWho());
         try {
             this.persist(toUpdate);
         } catch (Exception e) {
@@ -29,4 +26,5 @@ public class ApartRepo implements PanacheRepositoryBase<Apart, Integer> {
         }
         return true;
     }
+
 }
